@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <title>Services | MotionWorkMedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MotionWorkMedia<span>.</span></div>
+            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Studio</a></li>
+                <li><a href="work.html">Portfolio</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 style="font-size: 3rem;">Services & Pricing</h2>
+                <p style="margin: 20px auto; max-width: 600px; color: var(--iron-grey);">Transparent pricing. Flexible Packages.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn">Fill Project Form</a>
+            </div>
+            
+            <h3 style="margin: 50px 0 30px; border-left: 5px solid var(--carbon-black); padding-left: 15px;">🎬 Video Editing</h3>
+            <div class="grid-3">
+                <div class="price-card">
+                    <h3>Short-Form</h3>
+                    <div class="price-tag">₹999<span>/video</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Reels / Shorts</li><li><i class="fas fa-check"></i> Captions & Motion</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+                <div class="price-card">
+                    <h3>Long-Form</h3>
+                    <div class="price-tag">₹2,999<span>/start</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> YouTube / Podcast</li><li><i class="fas fa-check"></i> Story Editing</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+                <div class="price-card">
+                    <h3>2D Animation</h3>
+                    <div class="price-tag">₹299<span>/sec</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Custom Characters</li><li><i class="fas fa-check"></i> Smooth Motion</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+            </div>
+
+            <h3 style="margin: 50px 0 30px; border-left: 5px solid var(--carbon-black); padding-left: 15px;">🎨 Design & Web</h3>
+            <div class="grid-3">
+                <div class="price-card">
+                    <h3>Social Media</h3>
+                    <div class="price-tag">₹499<span>/post</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> High Quality</li><li><i class="fas fa-check"></i> Brand Aligned</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+                <div class="price-card">
+                    <h3>UI/UX Design</h3>
+                    <div class="price-tag">₹5,999<span>/start</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Figma Design</li><li><i class="fas fa-check"></i> Modern Layout</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+                <div class="price-card">
+                    <h3>Web Dev</h3>
+                    <div class="price-tag">₹14,999<span>/start</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Responsive</li><li><i class="fas fa-check"></i> SEO Ready</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Order Now</a>
+                </div>
+            </div>
+            
+             <h3 style="margin: 50px 0 30px; border-left: 5px solid var(--carbon-black); padding-left: 15px;">📦 Packages</h3>
+            <div class="grid-3">
+                 <div class="price-card" style="border: 2px solid var(--carbon-black);">
+                    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--carbon-black); letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;">Most Popular</div>
+                    <h3>Growth Package</h3>
+                    <div class="price-tag">₹24,999<span>/mo</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Shorts Bundle</li><li><i class="fas fa-check"></i> Social Graphics</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Get Plan</a>
+                </div>
+                 <div class="price-card premium">
+                    <h3>Brand Partner</h3>
+                    <div class="price-tag">Custom</div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Full Agency Access</li><li><i class="fas fa-check"></i> Dedicated Team</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; margin-top:20px;">Contact Us</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <h2 style="font-size: 2rem; margin-bottom: 20px;">MotionWorkMedia.</h2>
+            <div>
+                <a href="https://www.instagram.com/motionwork_media/?igsh=amlpdmNqb2twOW5i#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/917240517339" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">© 2026 MotionWorkMedia. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    </script>
+</body>
+</html>

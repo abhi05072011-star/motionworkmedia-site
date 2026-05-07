@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <title>MotionWorkMedia | Creative Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- GLOBAL VARIABLES (RAINBOW DARK THEME) --- */
+        :root {
+            --strawberry: #f94144;
+            --tangerine: #f3722c;
+            --orange: #f8961e;
+            --coral: #f9844a;
+            --yellow: #f9c74f;
+            --willow: #90be6d;
+            --seagrass: #43aa8b;
+            --cyan: #4d908e;
+            --slate: #577590;
+            --cerulean: #277da1;
+
+            /* Dark Theme Base */
+            --bg-dark: #0f1115;
+            --bg-card: #181a1f;
+            --text-white: #ffffff;
+            --text-grey: #a0a0a0;
+            
+            --brand-gradient: linear-gradient(90deg, var(--strawberry), var(--orange), var(--willow), var(--cerulean));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+        .section-padding { padding: 100px 0; position: relative; }
+        .text-center { text-align: center; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block; padding: 14px 40px; 
+            background: transparent; color: var(--text-white);
+            text-transform: uppercase; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;
+            border: 2px solid transparent; border-radius: 50px;
+            background-image: linear-gradient(var(--bg-dark), var(--bg-dark)), var(--brand-gradient);
+            background-origin: border-box; background-clip: padding-box, border-box;
+            cursor: pointer; transition: 0.4s;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(39, 125, 161, 0.3);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            padding: 20px 0; background: rgba(15, 17, 21, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Logo Link */
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; display: block; cursor: pointer; }
+        .logo span { 
+            background: var(--brand-gradient); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-white); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 600; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; color: var(--yellow); }
+
+        /* --- 3D HERO ANIMATION --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
+            perspective: 1200px; 
+        }
+
+        /* The 3D Container */
+        .scene-3d {
+            position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
+            transform: translate(-50%, -50%); transform-style: preserve-3d;
+            z-index: 0; opacity: 0.4;
+            transition: transform 0.1s linear; /* Smooth mouse follow */
+        }
+        
+        /* Rings */
+        .ring {
+            position: absolute; top: 50%; left: 50%; border-radius: 50%;
+            border: 2px solid transparent;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
+        }
+        .ring:nth-child(1) { width: 100%; height: 100%; border-color: var(--strawberry); animation: spin 10s infinite linear reverse; }
+        .ring:nth-child(2) { width: 80%; height: 80%; border-color: var(--yellow); animation: spin 15s infinite linear; }
+        .ring:nth-child(3) { width: 60%; height: 60%; border-color: var(--cerulean); animation: spin 8s infinite linear reverse; }
+        .ring:nth-child(4) { width: 40%; height: 40%; border-color: var(--willow); animation: spin 5s infinite linear; }
+
+        @keyframes spin { 0% {transform: translate(-50%, -50%) rotate(0deg);} 100% {transform: translate(-50%, -50%) rotate(360deg);} }
+
+        /* Hero Content */
+        .hero-content { position: relative; z-index: 2; transform-style: preserve-3d; }
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 6rem); line-height: 1.1; margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- SERVICES CARD STYLES --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .service-card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 30px; border-radius: 20px; transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .service-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); border-color: var(--yellow); }
+        
+        .service-card h3 { margin-bottom: 10px; font-size: 1.5rem; }
+        .price-tag { font-size: 2rem; font-weight: 700; margin: 15px 0; color: var(--text-white); }
+        .price-tag span { font-size: 1rem; color: var(--text-grey); font-weight: 400; }
+        
+        .features li { margin-bottom: 8px; font-size: 0.9rem; color: var(--text-grey); display: flex; gap: 10px; }
+        .features i { color: var(--willow); }
+
+        /* Specific Colors */
+        .s-ugc { border-top: 4px solid var(--tangerine); }
+        .s-char { border-top: 4px solid var(--cerulean); }
+        .s-video { border-top: 4px solid var(--strawberry); }
+        .s-design { border-top: 4px solid var(--yellow); }
+        .s-web { border-top: 4px solid var(--willow); }
+
+        /* --- PORTFOLIO --- */
+        .filter-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+        .filter-btn {
+            background: rgba(255,255,255,0.05); border: none; padding: 10px 20px; border-radius: 30px;
+            color: var(--text-white); cursor: pointer; transition: 0.3s; font-family: 'Outfit', sans-serif;
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--text-white); color: var(--bg-dark); }
+
+        .work-card { border-radius: 15px; overflow: hidden; position: relative; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        .work-card.hide { display: none; }
+        .work-card.show { display: block; animation: zoomIn 0.5s ease; }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .work-thumb { height: 250px; position: relative; }
+        .work-thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .work-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: 0.3s;
+        }
+        .work-overlay i { font-size: 3rem; color: var(--yellow); }
+        .work-card:hover .work-thumb img { transform: scale(1.1); }
+        .work-card:hover .work-overlay { opacity: 1; }
+        .work-info { padding: 20px; background: var(--bg-card); }
+
+        /* --- VIDEO MODAL --- */
+        .video-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9999;
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .video-modal.active { display: flex; }
+        .modal-content { width: 100%; max-width: 900px; aspect-ratio: 16/9; background: black; position: relative; border: 1px solid var(--text-grey); }
+        .modal-content iframe { width: 100%; height: 100%; border: none; }
+        .close-modal { position: absolute; top: -40px; right: 0; color: white; font-size: 2rem; cursor: pointer; }
+
+        /* --- FOOTER --- */
+        footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 50px 0; margin-top: 50px; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: 100vh;
+                background: var(--bg-dark); flex-direction: column; align-items: center; justify-content: center;
+                transition: 0.4s;
+            }
+            .nav-links.active { left: 0; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 3rem; }
+            .scene-3d { width: 300px; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">MotionWorkMedia<span>.</span></a>
+            
+            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#work" onclick="toggleMenu()">Work</a></li>
+                <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        
+        <div class="scene-3d" id="scene3D">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+
+        <div class="container hero-content">
+            <div style="display: inline-block; padding: 5px 15px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; margin-bottom: 20px; backdrop-filter: blur(5px);">
+                <span style="height: 8px; width: 8px; background: var(--willow); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--willow);"></span> 
+                Available for Projects
+            </div>
+            
+            <h1>We Don't Just Edit.<br>We <span class="gradient-text">Ignite.</span></h1>
+            
+            <p style="max-width: 600px; margin: 0 auto 40px; color: var(--text-grey); font-size: 1.2rem;">
+                A full-spectrum creative agency transforming raw ideas into 3D motion, animation, and viral assets.
+            </p>
+            
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#work" class="btn">View Portfolio</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Get Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="work" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2 style="font-size: 3rem;">Selected Works</h2>
+                <div class="filter-menu">
+                    <button class="filter-btn active" onclick="filterSelection('all', this)">All</button>
+                    <button class="filter-btn" onclick="filterSelection('2d', this)">2D Animation</button>
+                    <button class="filter-btn" onclick="filterSelection('motion', this)">Motion</button>
+                    <button class="filter-btn" onclick="filterSelection('music', this)">Music Video</button>
+                    <button class="filter-btn" onclick="filterSelection('shorts', this)">Shorts</button>
+                    <button class="filter-btn" onclick="filterSelection('graphic', this)">Graphics</button>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                 <div class="work-card show" data-category="2d" onclick="openVideo('q_An8H-b94Q')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/q_An8H-b94Q/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>2D Animation Showcase</h3><span style="color:var(--orange)">Character Story</span></div>
+                </div>
+                <div class="work-card show" data-category="2d" onclick="openVideo('MqE7xt_THiU')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/MqE7xt_THiU/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Explainer Video</h3><span style="color:var(--orange)">Business</span></div>
+                </div>
+                <div class="work-card show" data-category="2d" onclick="openVideo('QSVrUIoMtVM')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/QSVrUIoMtVM/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Creative Story Ad</h3><span style="color:var(--orange)">Narrative</span></div>
+                </div>
+
+
+
+                <div class="work-card show" data-category="music" onclick="openVideo('QtnUmCJk13c')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/QtnUmCJk13c/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-music"></i></div></div>
+                    <div class="work-info"><h3>Music Video 01</h3><span style="color:var(--strawberry)">Cinematic</span></div>
+                </div>
+                <div class="work-card show" data-category="music" onclick="openVideo('LQzNDTf2Bxk')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/LQzNDTf2Bxk/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-music"></i></div></div>
+                    <div class="work-info"><h3>Music Video 02</h3><span style="color:var(--strawberry)">Grading</span></div>
+                </div>
+
+                <div class="work-card show" data-category="shorts" onclick="openVideo('GnaKXHAyEg8')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/GnaKXHAyEg8/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-mobile-alt"></i></div></div>
+                    <div class="work-info"><h3>Viral Shorts</h3><span style="color:var(--willow)">Retention</span></div>
+                </div>
+
+                <a href="https://www.behance.net/gallery/179031053/Social-media-ad-design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: var(--bg-card); display: flex; align-items:center; justify-content:center;">
+                        <i class="fab fa-behance" style="font-size: 4rem; color: var(--yellow);"></i>
+                    </div>
+                    <div class="work-info"><h3>Social Media Ads</h3><span style="color:var(--yellow)">Graphic</span></div>
+                </a>
+                 <a href="https://www.behance.net/gallery/179030223/logo-animation" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: var(--bg-card); display: flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-bezier-curve" style="font-size: 4rem; color: var(--yellow);"></i>
+                    </div>
+                    <div class="work-info"><h3>Logo Animation</h3><span style="color:var(--yellow)">Branding</span></div>
+                </a>
+                <a href="https://www.behance.net/gallery/153786139/Landing-Page-Design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: var(--bg-card); display: flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-desktop" style="font-size: 4rem; color: var(--yellow);"></i>
+                    </div>
+                    <div class="work-info"><h3>Landing Page UI</h3><span style="color:var(--yellow)">Web</span></div>
+                </a>
+                <a href="https://www.behance.net/gallery/153785803/Instagram-post-design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: var(--bg-card); display: flex; align-items:center; justify-content:center;">
+                        <i class="fab fa-instagram" style="font-size: 4rem; color: var(--yellow);"></i>
+                    </div>
+                    <div class="work-info"><h3>Instagram Creatives</h3><span style="color:var(--yellow)">Social</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2 style="font-size: 3rem;">Services & Pricing</h2>
+                <p style="color: var(--text-grey);">Transparent Pricing. Studio Quality.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="margin-top: 20px;">Start Project</a>
+            </div>
+
+            <div class="grid-3">
+                <div class="service-card s-video">
+                    <h3>Shorts & Reels</h3>
+                    <div class="price-tag">₹999<span>/video</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Retention Editing</li><li><i class="fas fa-check"></i> Motion Graphics</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+
+                <div class="service-card s-ugc">
+                    <h3>UGC Ads</h3>
+                    <div class="price-tag">₹1,499<span>/video</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Authentic Hooks</li><li><i class="fas fa-check"></i> Script Help</li><li><i class="fas fa-check"></i> Ad Optimized</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+
+                <div class="service-card s-char">
+                    <h3>Character Design</h3>
+                    <div class="price-tag">₹3,999<span>/char</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Custom Vector Art</li><li><i class="fas fa-check"></i> Rigging Ready</li><li><i class="fas fa-check"></i> Multiple Angles</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+
+                <div class="service-card s-video">
+                    <h3>2D Animation</h3>
+                    <div class="price-tag">₹299<span>/sec</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Smooth Motion</li><li><i class="fas fa-check"></i> Storyboarding</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+
+                <div class="service-card s-design">
+                    <h3>Social Design</h3>
+                    <div class="price-tag">₹499<span>/post</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Brand Aligned</li><li><i class="fas fa-check"></i> Feed Ready</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+
+                <div class="service-card s-web">
+                    <h3>Web Dev</h3>
+                    <div class="price-tag">₹14,999<span>/start</span></div>
+                    <ul class="features"><li><i class="fas fa-check"></i> Responsive</li><li><i class="fas fa-check"></i> SEO Ready</li></ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn" style="width:100%; text-align:center; font-size:0.8rem; margin-top:20px;">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <h2 class="logo" style="margin-bottom: 20px; font-size: 2rem;">MotionWorkMedia<span>.</span></h2>
+            <div style="font-size: 1.5rem;">
+                <a href="https://www.instagram.com/motionwork_media/?igsh=amlpdmNqb2twOW5i#" target="_blank" style="margin:0 10px;"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/917240517339" target="_blank" style="margin:0 10px;"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 30px; color: var(--text-grey); font-size: 0.9rem;">© 2026 MotionWorkMedia. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <iframe id="videoPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // 1. MOBILE MENU TOGGLE
+        function toggleMenu() { 
+            document.getElementById('navLinks').classList.toggle('active'); 
+        }
+
+        // 2. FILTER LOGIC
+        function filterSelection(c, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.work-card').forEach(card => {
+                if(c === 'all' || card.dataset.category === c) {
+                    card.classList.remove('hide'); card.classList.add('show');
+                } else {
+                    card.classList.remove('show'); card.classList.add('hide');
+                }
+            });
+        }
+
+        // 3. VIDEO MODAL LOGIC
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('videoPlayer');
+        function openVideo(id) { 
+            player.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0"; 
+            modal.classList.add('active'); 
+        }
+        function closeVideo() { 
+            modal.classList.remove('active'); 
+            player.src = ""; 
+        }
+        modal.addEventListener('click', e => { if(e.target === modal) closeVideo(); });
+
+        // 4. INTERACTIVE 3D ANIMATION LOGIC (MOUSE + SCROLL)
+        const scene = document.getElementById('scene3D');
+        
+        // Mouse Move Effect (Parallax)
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.clientX) / 25; 
+            const y = (window.innerHeight / 2 - e.clientY) / 25; 
+            
+            // Rotate the scene based on mouse position
+            scene.style.transform = `translate(-50%, -50%) rotateX(${60 + y}deg) rotateZ(${x}deg)`;
+        });
+
+        // Scroll Effect (Move down slightly)
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            scene.style.top = `calc(50% + ${scrollY * 0.5}px)`; 
+        });
+
+    </script>
+</body>
+</html>

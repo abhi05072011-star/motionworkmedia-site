@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <title>Portfolio | MotionWorkMedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MotionWorkMedia<span>.</span></div>
+            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Studio</a></li>
+                <li><a href="work.html" class="active">Portfolio</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">Selected Work</h2>
+                <div class="filter-menu">
+                    <button class="filter-btn active" onclick="filterSelection('all', this)">All</button>
+                    <button class="filter-btn" onclick="filterSelection('2d', this)">2D Animation</button>
+                    <button class="filter-btn" onclick="filterSelection('motion', this)">Motion GFX</button>
+                    <button class="filter-btn" onclick="filterSelection('music', this)">Music Videos</button>
+                    <button class="filter-btn" onclick="filterSelection('shorts', this)">Shorts</button>
+                    <button class="filter-btn" onclick="filterSelection('graphic', this)">Graphics</button>
+                </div>
+            </div>
+            
+            <div class="grid-3">
+                <div class="work-card show" data-category="2d" onclick="openVideo('q_An8H-b94Q')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/q_An8H-b94Q/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>2D Animation Showcase</h3></div>
+                </div>
+                <div class="work-card show" data-category="2d" onclick="openVideo('MqE7xt_THiU')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/MqE7xt_THiU/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Explainer Video</h3></div>
+                </div>
+                <div class="work-card show" data-category="2d" onclick="openVideo('QSVrUIoMtVM')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/QSVrUIoMtVM/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Creative Story Ad</h3></div>
+                </div>
+
+                <div class="work-card show" data-category="motion" onclick="openVideo('waMBlybab8w')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/waMBlybab8w/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Motion Graphics Showreel</h3></div>
+                </div>
+                <div class="work-card show" data-category="motion" onclick="openVideo('hXgHOGwNYMs')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/hXgHOGwNYMs/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-play"></i></div></div>
+                    <div class="work-info"><h3>Kinetic Typography</h3></div>
+                </div>
+
+                <div class="work-card show" data-category="music" onclick="openVideo('QtnUmCJk13c')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/QtnUmCJk13c/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-music"></i></div></div>
+                    <div class="work-info"><h3>Music Video Edit 01</h3></div>
+                </div>
+                <div class="work-card show" data-category="music" onclick="openVideo('LQzNDTf2Bxk')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/LQzNDTf2Bxk/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-music"></i></div></div>
+                    <div class="work-info"><h3>Music Video Edit 02</h3></div>
+                </div>
+
+                <div class="work-card show" data-category="shorts" onclick="openVideo('GnaKXHAyEg8')">
+                    <div class="work-thumb"><img src="https://img.youtube.com/vi/GnaKXHAyEg8/hqdefault.jpg"><div class="work-overlay"><i class="fas fa-mobile-alt"></i></div></div>
+                    <div class="work-info"><h3>Viral Shorts Edit</h3></div>
+                </div>
+
+                <a href="https://www.behance.net/gallery/179031053/Social-media-ad-design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: #212529;"><i class="fab fa-behance" style="color: white; font-size: 4rem; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%);"></i></div>
+                    <div class="work-info"><h3>Social Media Ads</h3></div>
+                </a>
+                <a href="https://www.behance.net/gallery/179030223/logo-animation" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: #212529;"><i class="fas fa-bezier-curve" style="color: white; font-size: 4rem; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%);"></i></div>
+                    <div class="work-info"><h3>Logo Animation</h3></div>
+                </a>
+                 <a href="https://www.behance.net/gallery/153786139/Landing-Page-Design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: #212529;"><i class="fas fa-desktop" style="color: white; font-size: 4rem; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%);"></i></div>
+                    <div class="work-info"><h3>Landing Page UI</h3></div>
+                </a>
+                <a href="https://www.behance.net/gallery/153785803/Instagram-post-design" target="_blank" class="work-card show" data-category="graphic">
+                    <div class="work-thumb" style="background: #212529;"><i class="fab fa-instagram" style="color: white; font-size: 4rem; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%);"></i></div>
+                    <div class="work-info"><h3>Instagram Creatives</h3></div>
+                </a>
+            </div>
+            
+             <div class="text-center" style="margin-top: 60px;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSesAOYE52B97PbP-AQnBQZ3xBTIR0ymVVCViyEOSLxhz5Xndg/viewform?usp=dialog" target="_blank" class="btn">Fill Project Form</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <iframe id="videoPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <h2 style="font-size: 2rem; margin-bottom: 20px;">MotionWorkMedia.</h2>
+            <div>
+                <a href="https://www.instagram.com/motionwork_media/?igsh=amlpdmNqb2twOW5i#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/917240517339" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">© 2026 MotionWorkMedia. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // MOBILE MENU
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+
+        // FILTER
+        function filterSelection(c, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.work-card').forEach(card => {
+                if (c === 'all' || card.dataset.category === c) { card.classList.remove('hide'); card.classList.add('show'); }
+                else { card.classList.remove('show'); card.classList.add('hide'); }
+            });
+        }
+
+        // VIDEO POPUP
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('videoPlayer');
+        function openVideo(id) { player.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0"; modal.classList.add('active'); }
+        function closeVideo() { modal.classList.remove('active'); player.src = ""; }
+        modal.addEventListener('click', e => { if(e.target === modal) closeVideo(); });
+    </script>
+</body>
+</html>
