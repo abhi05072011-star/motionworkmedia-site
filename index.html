@@ -434,6 +434,57 @@
             *, *::before, *::after { animation: none !important; transition: none !important; }
             html { scroll-behavior: auto; }
         }
+
+        /* ===== PALETTE 60/30/10: dark base, yellow = action only, red = urgency only ===== */
+        :root {
+            --bg-dark: #0B0D12;          /* 60% background */
+            --bg-card: #151922;          /* 30% surfaces */
+            --text-white: #E8EAF0;       /* main text */
+            --text-grey: #9AA3B2;        /* secondary text */
+            --yellow: #F9C74F;           /* 10% action only */
+            --strawberry: #F94144;       /* urgency only */
+            --trust: #6CB4D9;            /* light tint of cerulean #277DA1, readable on dark */
+            --willow: #90BE6D;           /* checkmarks / available */
+        }
+        body { background-color: var(--bg-dark); color: var(--text-white); }
+        .navbar { background: rgba(11,13,18,0.9); }
+
+        /* Buttons: one solid yellow CTA, the rest quiet outline */
+        .btn { background: transparent; background-image: none; border: 1.5px solid rgba(232,234,240,0.25); color: var(--text-white); }
+        .btn:hover { border-color: var(--text-white); box-shadow: none; }
+        .hero .btn[href*="docs.google"], .bf-ctas .btn { background: transparent !important; }
+        .hero .btn:last-child { background: var(--yellow) !important; color: #0B0D12 !important; border-color: var(--yellow) !important; box-shadow: 0 10px 30px rgba(249,199,79,0.25); }
+        .service-card .btn { background: transparent; border-color: rgba(249,199,79,0.6); color: var(--yellow); }
+        .service-card .btn:hover { background: var(--yellow); color: #0B0D12; }
+
+        /* Hero: calm cool background, rainbow only on "Ignite" */
+        .hero-kicker { color: var(--trust); }
+        .ring { box-shadow: none; }
+        .ring:nth-child(1) { border-color: rgba(108,180,217,0.55); }
+        .ring:nth-child(2) { border-color: rgba(232,234,240,0.12); }
+        .ring:nth-child(3) { border-color: rgba(108,180,217,0.25); }
+        .ring:nth-child(4) { border-color: rgba(232,234,240,0.08); }
+        .step-num.gradient-text { background: none; -webkit-text-fill-color: var(--trust); color: var(--trust); }
+
+        /* Black Friday: yellow = deal, red = urgency only */
+        .bf { background: radial-gradient(circle at 85% 70%, rgba(39,125,161,0.18), transparent 50%), #0B0D12; }
+        .bf-title .shine { background: none; -webkit-text-fill-color: var(--yellow); animation: none; }
+        .bf-slots-top span:last-child { color: var(--strawberry); }
+        .bf-fill { background: var(--strawberry); }
+        .bf-unit { background: var(--bg-card); border-color: rgba(232,234,240,0.08); }
+        .bf-copy { color: var(--text-grey); }
+        .bf-copy strong { color: var(--text-white); }
+        .bf-phone { box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(249,199,79,0.12); }
+
+        /* Cards: same quiet surface, no rainbow top borders */
+        .service-card, .step, .faq-item { background: var(--bg-card); border-color: rgba(232,234,240,0.08); }
+        .s-ugc, .s-char, .s-video, .s-design, .s-web { border-top: 1px solid rgba(232,234,240,0.08); }
+        .service-card:hover { border-color: rgba(249,199,79,0.6); background: var(--bg-card); }
+        .work-meta { color: var(--text-grey) !important; }
+        .work-card, .work-info { background: var(--bg-card); }
+        .work-thumb i { color: var(--trust) !important; }
+        .faq-item summary::after { color: var(--trust); }
+        .footer-contact a:hover, .nav-links a:hover { color: var(--yellow); }
     </style>
 </head>
 <body>
