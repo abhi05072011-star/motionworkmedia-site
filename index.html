@@ -495,8 +495,7 @@
                 <div class="bf-phone">
                     <div class="bf-screen">
                         <!-- Promo reel: 1 free high-motion reel for the first 15 clients. Source: saved-code/header-video -->
-                        <video class="bf-video" id="bfVideo" muted loop playsinline preload="none" poster="/video/bf-free-reel-poster.jpg">
-                            <source data-src="/video/bf-free-reel.webm" type="video/webm">
+                        <video class="bf-video" id="bfVideo" autoplay muted loop playsinline preload="none" poster="/video/bf-free-reel-poster.jpg">
                             <source data-src="/video/bf-free-reel.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -785,18 +784,24 @@
             const timer = setInterval(tick, 1000);
             tick();
 
-            // Promo video: load only while the offer is live; respect reduced motion.
-            // Reduced-motion visitors see the poster and can tap the phone to play it.
+            // Promo video: load only while the offer is live, autoplay muted for everyone.
+            // Tapping the phone pauses / resumes it.
             const vid = document.getElementById('bfVideo');
             if (vid) {
+                vid.muted = true;
                 vid.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; });
                 vid.load();
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                    vid.style.cursor = 'pointer';
-                    vid.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
-                } else {
-                    vid.play().catch(() => {});
-                }
+                const tryPlay = () => vid.play().catch(() => {});
+                vid.addEventListener('canplay', tryPlay, { once: true });
+                tryPlay();
+                // Some browsers block autoplay until the first interaction.
+                ['pointerdown', 'scroll', 'keydown'].forEach(ev =>
+                    window.addEventListener(ev, () => { if (vid.paused && !vid.dataset.userPaused) tryPlay(); }, { once: true, passive: true }));
+                vid.style.cursor = 'pointer';
+                vid.addEventListener('click', () => {
+                    if (vid.paused) { delete vid.dataset.userPaused; tryPlay(); }
+                    else { vid.dataset.userPaused = '1'; vid.pause(); }
+                });
             }
         })();
 
