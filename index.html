@@ -386,7 +386,7 @@
         /* Phone mockup with a FREE sticker */
         .bf-visual { position: relative; display: flex; justify-content: center; }
         .bf-phone {
-            position: relative; width: 250px; aspect-ratio: 9 / 19; border-radius: 38px; padding: 10px;
+            position: relative; width: 280px; aspect-ratio: 9 / 17; border-radius: 38px; padding: 10px;
             background: linear-gradient(160deg, #2b2e35, #121318); border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(249,65,68,0.15);
             transform: rotate(-6deg); animation: float 6s ease-in-out infinite;
@@ -397,18 +397,11 @@
             background: linear-gradient(200deg, #f3722c 0%, #f94144 35%, #277da1 100%);
             display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
         }
+        .bf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #07080a; }
         .bf-screen::before {
             content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-            width: 70px; height: 18px; border-radius: 10px; background: #0b0c0f;
+            width: 70px; height: 18px; border-radius: 10px; background: #0b0c0f; z-index: 2;
         }
-        .bf-play {
-            position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.25); backdrop-filter: blur(6px);
-            display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
-        }
-        .bf-reel-line { height: 8px; border-radius: 6px; background: rgba(255,255,255,0.55); margin-top: 8px; }
-        .bf-reel-line.short { width: 60%; }
-        .bf-side { position: absolute; right: 14px; bottom: 90px; display: flex; flex-direction: column; gap: 16px; font-size: 1.2rem; }
         .bf-sticker {
             position: absolute; top: -10px; right: -30px; width: 130px; height: 130px; border-radius: 50%;
             background: var(--yellow); color: #0f1115; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -431,7 +424,10 @@
             .bf-sticker { width: 110px; height: 110px; right: -20px; }
         }
         @media (max-width: 600px) {
-            .bf-visual { display: none; }
+            .bf-phone { width: 210px; }
+            .bf-sticker { width: 92px; height: 92px; right: -14px; border-width: 3px; }
+            .bf-sticker b { font-size: 1.5rem; }
+            .bf-sticker span, .bf-sticker s { font-size: 0.65rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -498,10 +494,11 @@
             <div class="bf-visual" aria-hidden="true">
                 <div class="bf-phone">
                     <div class="bf-screen">
-                        <div class="bf-play"><i class="fas fa-play"></i></div>
-                        <div class="bf-side"><i class="fas fa-heart"></i><i class="fas fa-comment"></i><i class="fas fa-paper-plane"></i></div>
-                        <div class="bf-reel-line"></div>
-                        <div class="bf-reel-line short"></div>
+                        <!-- Promo reel: 1 free high-motion reel for the first 15 clients. Source: saved-code/header-video -->
+                        <video class="bf-video" id="bfVideo" muted loop playsinline preload="none" poster="/video/bf-free-reel-poster.jpg">
+                            <source data-src="/video/bf-free-reel.webm" type="video/webm">
+                            <source data-src="/video/bf-free-reel.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
                 <div class="bf-sticker"><span>Worth</span><s>₹999</s><b>FREE</b></div>
@@ -763,7 +760,7 @@
 
         // 5. BLACK FRIDAY OFFER
         // Update this number by hand as clients claim their free reel.
-        const BF_SLOTS_LEFT = 14;
+        const BF_SLOTS_LEFT = 4;
         const BF_SLOTS_TOTAL = 15;
         const BF_END = new Date('2026-11-30T23:59:59+05:30');
 
@@ -787,6 +784,20 @@
             };
             const timer = setInterval(tick, 1000);
             tick();
+
+            // Promo video: load only while the offer is live; respect reduced motion.
+            // Reduced-motion visitors see the poster and can tap the phone to play it.
+            const vid = document.getElementById('bfVideo');
+            if (vid) {
+                vid.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; });
+                vid.load();
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    vid.style.cursor = 'pointer';
+                    vid.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
+                } else {
+                    vid.play().catch(() => {});
+                }
+            }
         })();
 
         // 4. INTERACTIVE 3D ANIMATION LOGIC (MOUSE + SCROLL)
